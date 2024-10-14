@@ -35,17 +35,17 @@ local M = {
     {
       "hrsh7th/cmp-nvim-lua",
     },
-    -- {
-    --   "roobert/tailwindcss-colorizer-cmp.nvim",
-    -- },
+    {
+      "roobert/tailwindcss-colorizer-cmp.nvim",
+    },
   },
   event = "InsertEnter",
 }
 
 function M.config()
-  -- require("tailwindcss-colorizer-cmp").setup {
-  --   color_square_width = 2,
-  -- }
+  require("tailwindcss-colorizer-cmp").setup {
+    color_square_width = 2,
+  }
 
   -- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
   -- vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
@@ -224,7 +224,7 @@ function M.config()
           local color = tailwindcss_colors[color_name][color_index]
 
           local hl_group = "lsp_documentColor_mf_" .. color
-          -- vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
+          vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
           vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "NONE" })
 
           vim_item.kind_hl_group = hl_group
@@ -232,7 +232,7 @@ function M.config()
           -- make the color square 2 chars wide
           vim_item.kind = string.rep("▣", 1)
 
-          -- return vim_item
+          return vim_item
         end
 
         -- if entry.source.name == "copilot" then
@@ -273,9 +273,9 @@ function M.config()
             return false
           end
 
-          if ctx.prev_context.filetype == "markdown" then
-            return true
-          end
+          -- if ctx.prev_context.filetype == "markdown" then
+          --   return true
+          -- end
 
           if kind == "Text" then
             return false
@@ -285,7 +285,7 @@ function M.config()
         end,
       },
       { name = "luasnip" },
-      { name = "cmp_tabnine" },
+      -- { name = "cmp_tabnine" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
@@ -327,13 +327,12 @@ function M.config()
     },
   }
 
-  pcall(function()
+  -- pcall(function()
     -- local function on_confirm_done(...)
     --   require("nvim-autopairs.completion.cmp").on_confirm_done()(...)
     -- end
     -- require("cmp").event:off("confirm_done", on_confirm_done)
     -- require("cmp").event:on("confirm_done", on_confirm_done)
-  end)
+  -- end)
 end
-
 return M

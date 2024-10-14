@@ -12,6 +12,8 @@ function M.config()
 
   keymap("n", "<s-m>", "<cmd>lua require('seb.harpoon').mark_file()<cr>", opts)
   keymap("n", "<TAB>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
+  keymap("n", ".", "<cmd>lua require('harpoon.ui').nav_next()<cr>", opts)
+  keymap("n", ",", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", opts)
   vim.api.nvim_create_autocmd({ "filetype" }, {
     pattern = "harpoon",
     callback = function()

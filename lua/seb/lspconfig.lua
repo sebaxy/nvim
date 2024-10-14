@@ -88,6 +88,7 @@ function M.config()
     "jsonls",
     "yamlls",
     "eslint",
+    "intelephense",
   }
 
   local default_diagnostic_config = {

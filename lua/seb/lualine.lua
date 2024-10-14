@@ -17,6 +17,20 @@ function M.config()
     always_visible = true, -- Show diagnostics even if there are none.
   }
 
+  local clients_lsp = function ()
+    local clients = vim.lsp.get_active_clients { bufnr = 0 }
+    if next(clients) == nil then
+      return ''
+    end
+    local c = {}
+    for _, client in pairs(clients) do
+      if client.name ~= 'null-ls' then
+        table.insert(c, client.name)
+      end
+    end
+    return '[' .. table.concat(c, ', ') .. ']'
+  end
+
   local filetype = {
     function()
       local filetype = vim.bo.filetype
@@ -60,14 +74,15 @@ function M.config()
       lualine_a = {},
       lualine_b = { "branch" },
       lualine_c = { diagnostics },
+      -- lualine_c = { diagnostics },
       -- lualine_x = { diff, "copilot", filetype },
-      -- lualine_x = { "copilot", filetype },
+      lualine_x = { filetype, { clients_lsp, color = { gui = "bold" }} },
       -- lualine_y = { "filetype" },
-      lualine_y = { "progress" },
+      lualine_y = { "location", "progress" },
       lualine_z = {},
     },
-    -- extensions = { "quickfix", "man", "fugitive", "oil" },
-    extensions = { "quickfix", "man", "fugitive" },
+    extensions = { "quickfix", "man", "fugitive", "oil" },
+    -- extensions = { "quickfix", "man", "fugitive" },
   }
 end
 
