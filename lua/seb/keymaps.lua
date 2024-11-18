@@ -11,6 +11,7 @@ keymap("n", "<C-i>", "<C-i>", opts)
 keymap("n", "<leader>aa", "gg<S-v>G", opts) -- select all
 keymap("n", "<C-s>", ":w!<CR>", opts) -- save
 keymap("n", "<C-x>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- find & replace under the cursor
+keymap({"n", "v"}, "<leader>d", "\"_d") -- delete into void
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
